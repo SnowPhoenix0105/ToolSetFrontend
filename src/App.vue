@@ -10,6 +10,19 @@
   </div>
 </template>
 
+<script>
+import {ensureLoginAsync} from './utils/user'
+
+export default {
+  async mounted() {
+    console.log("calling async App.vue::mounted()");
+    console.log("store:")
+    console.dir(this.$store);
+    ensureLoginAsync(this.$store);
+  }
+}
+</script>
+
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
