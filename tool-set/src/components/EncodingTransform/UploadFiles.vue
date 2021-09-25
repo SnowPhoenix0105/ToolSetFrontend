@@ -1,0 +1,117 @@
+<template>
+  <el-col>
+    <el-row id="tips" justify="center">
+      <el-col>
+        请选择需要转码的文件所在的文件夹，将上传该文件夹下的所有文件。
+      </el-col>
+    </el-row>
+    <el-row justify="center">
+      <el-col :span="12">
+        <el-upload
+          id="MultiFileUpload"
+          ref="Upload"
+          action="http://localhost:8002/file/echo_info"
+          multiple
+          :auto-upload="false"
+          @change="() => (selected = true)"
+        >
+          <template #trigger>
+            <el-button size="medium" type="primary">选取</el-button>
+          </template>
+          <el-button
+            id="uploadButton"
+            size="medium"
+            type="success"
+            @click="submitUpload"
+            :disabled="!selected"
+            >上传</el-button
+          >
+          <template #tip>
+            <div class="el-upload__tip">选择文件夹，将上传文件夹内所有文件</div>
+          </template>
+        </el-upload>
+      </el-col>
+    </el-row>
+  </el-col>
+</template>
+
+<script>
+import { ensureLoginAsync } from "../../utils/user";
+export default {
+  name: "UploadFiles",
+  data() {
+    return {
+      fileList: [],
+      selected: false,
+    };
+  },
+  props: {
+    remote_baseurl: String,
+  },
+  emits: ["uploaded"],
+  mounted() {
+    let MultiFileUpload = document.getElementById("MultiFileUpload");
+    let el_up__input = MultiFileUpload.getElementsByTagName("input")[0];
+    el_up__input.webkitdirectory = true;
+    el_up__input.mozdirectory = true;
+  },
+  methods: {
+    async submitUpload() {
+      // console.log("submitUpload called");
+      // this.$refs.Upload.submit();
+      let files = this.$refs.Upload.uploadFiles;
+      if (files.length < 1) {
+        this.$notify({
+          title: "错误",
+          message: "上传的文件夹为空，或未进行上传",
+          type: "error",
+        });
+        return;
+      }
+      // console.dir(files);
+      // console.dir(this.$store);
+      let formData = new FormData();
+      for (let i = 0; i < files.length; i++) {
+        formData.append("file", files[i].raw);
+      }
+      let store = this.$store;
+      await ensureLoginAsync(store);
+      let response = await this.$axios.post(
+        this.$props.remote_baseurl + "/file/upload",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: "Bearer " + store.state.userCenter.accessToken,
+          },
+        }
+      );
+      // console.log("response:");
+      // console.dir(response.data);
+      const payload = {
+        selected: response.data.selected,
+        unselected: response.data.unselected,
+      };
+      // console.log("payload in caller:");
+      // console.dir(payload);
+      this.$store.commit("setSelectedFiles", payload);
+      this.$emit("uploaded");
+      // console.log("store.state")
+      // console.dir(this.$store.state);
+    },
+  },
+};
+</script>
+
+<style scoped>
+#tips {
+  padding-bottom: 20px;
+}
+#uploadButton {
+  margin-left: 20px;
+}
+#MultiFileUpload {
+  align-content: center;
+  text-align: center;
+}
+</style>

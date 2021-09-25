@@ -1,8 +1,8 @@
 <template>
-  <el-row class="tac">
-    <el-col :span="5">
+  <el-container>
+    <el-aside width="200px" class="sideBar">
       <el-menu
-        default-active="2"
+        default-active="vueHome"
         class="el-menu-vertical-demo"
         @open="handleOpen"
         @close="handleClose"
@@ -18,7 +18,9 @@
             <i class="el-icon-goods"></i>
             <span>工具箱</span>
           </template>
-          <el-menu-item index="/encoding-transform">文件编码转换器</el-menu-item>
+          <el-menu-item index="/encoding-transform"
+            >文件编码转换器</el-menu-item
+          >
           <!-- <el-menu-item-group title="Group One">
             <el-menu-item index="1-1">item one</el-menu-item>
             <el-menu-item index="1-2">item one</el-menu-item>
@@ -31,31 +33,46 @@
             <el-menu-item index="1-4-1">item one</el-menu-item>
           </el-sub-menu> -->
         </el-sub-menu>
-        <el-menu-item index="3" disabled>
+        <!-- <el-menu-item index="3" disabled>
           <i class="el-icon-document"></i>
           <span>Navigator Three</span>
         </el-menu-item>
         <el-menu-item index="4">
           <i class="el-icon-setting"></i>
           <span>Navigator Four</span>
-        </el-menu-item>
+        </el-menu-item> -->
       </el-menu>
-    </el-col>
-    <el-col :span="12">
+    </el-aside>
+    <el-main class="mainContent">
       <router-view></router-view>
-    </el-col>
-  </el-row>
+    </el-main>
+  </el-container>
 </template>
 
 <script>
 export default {
   methods: {
     handleOpen(key, keyPath) {
-      console.log(key, keyPath)
+      console.log(key, keyPath);
     },
     handleClose(key, keyPath) {
-      console.log(key, keyPath)
+      console.log(key, keyPath);
     },
   },
-}
+};
 </script>
+
+<style scoped>
+.sideBar {
+  width: 200px;
+  height: 100%;
+  position: absolute;
+  background: #f0ffff;
+}
+.mainContent {
+  width: 100%;
+  left: 200px;
+  right: 50px;
+  position: absolute;
+}
+</style>
