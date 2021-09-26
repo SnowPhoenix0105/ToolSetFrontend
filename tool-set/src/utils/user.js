@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const userCenter_baseUrl = "http://localhost:8001";
+const userCenter_baseUrl = "/api/usercenter";
 
 async function getNewTempAccountAsync() {
     let response = await axios.post(userCenter_baseUrl + "/temp/create");

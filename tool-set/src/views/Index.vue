@@ -1,8 +1,8 @@
 <template>
   <div>
     <el-row :gutter="20" v-for="row in toolset" :key="row[0].id">
-      <el-col :span="4" v-for="item in row" :key="item.id">
-        <a :href="item.link" class="menu">
+      <el-col :lg="4" :md="6" :sm="8" :xs="12" v-for="item in row" :key="item.id">
+        <router-link :to="item.link" class="menu">
           <div class="item">
             <img class="icon" :src="item.icon" />
             <div class="name">
@@ -12,7 +12,7 @@
               {{ item.desc }}
             </div>
           </div>
-        </a>
+        </router-link>
       </el-col>
     </el-row>
   </div>

@@ -64,7 +64,7 @@ export default {
   data() {
     return {
       active: 0,
-      remote_baseurl: "http://localhost:8002",
+      remote_baseurl: "/api/encoding-transform",
     };
   },
   name: "EncodingTransform",
