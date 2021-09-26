@@ -6,7 +6,7 @@ on:
 
 jobs:
 
-  build-with-maven:
+  build-with-npm:
 
     runs-on: ubuntu-latest
 
@@ -22,6 +22,9 @@ jobs:
 
     - name: Change Work Dir
       run: cd tool-set
+
+    - name: List Dir
+      run: ls .
 
     - name: Restore dependency
       run: npm install
