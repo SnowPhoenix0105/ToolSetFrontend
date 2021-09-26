@@ -94,14 +94,14 @@ export default {
 
 <style scopde>
 #mainCol {
-  width: 80%;
-  right: 100px;
+  width: 100%;
+  right: 10px;
 }
 #upload-files {
   padding-top: 50px;
 }
 #content {
-  margin-left: 10%;
-  margin-right: 10%;
+  margin-left: 5%;
+  margin-right: 5%;
 }
 </style>

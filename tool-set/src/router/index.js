@@ -16,6 +16,11 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
   },
   {
+    path: '/',
+    name: '目录',
+    component: () => import('../views/Index.vue')
+  },
+  {
     path: '/encoding-transform',
     name: '文件编码转换',
     component: () => import('../views/EncodingTransform.vue')

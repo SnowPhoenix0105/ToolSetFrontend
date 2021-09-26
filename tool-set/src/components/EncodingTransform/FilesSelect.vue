@@ -1,4 +1,3 @@
-
 <template>
   <el-col>
     <el-row>
@@ -58,8 +57,6 @@ export default {
       let _selected = [];
       let _unselected = [];
       const _set = new Set(this.selectedFiles);
-      // console.log("set:");
-      // console.dir(_set);
 
       this.files.forEach((file) => {
         if (_set.has(file.key)) {
@@ -74,13 +71,7 @@ export default {
         unselected: _unselected,
       };
 
-      // console.log("payload");
-      // console.dir(payload);
-
       this.$store.commit("setSelectedFiles", payload);
-
-      // console.log("store:");
-      // console.dir(this.$store.state);
 
       this.$emit("selected");
     },
@@ -88,8 +79,6 @@ export default {
   mounted() {
     let _data = this.files;
     let _value = this.selectedFiles;
-    // console.log("state:");
-    // console.dir(this.$store.state);
     this.$store.state.encodingTransformer.selected.forEach((e) => {
       _data.push({
         key: e.fid,
@@ -119,7 +108,7 @@ export default {
 }
 .el-transfer-panel {
   text-align: start;
-  width: 350px;
+  width: 400px;
   height: 500px;
   --el-transfer-panel-body-height: 450px;
 }

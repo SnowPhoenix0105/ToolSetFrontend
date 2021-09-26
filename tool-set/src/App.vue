@@ -1,15 +1,16 @@
 <template>
   <el-container>
-    <el-aside width="200px" class="sideBar">
+    <el-aside width="200px" class="sideBar tac">
       <el-menu
-        default-active="vueHome"
+        default-active="/"
         class="el-menu-vertical-demo"
         @open="handleOpen"
         @close="handleClose"
         router
         unique-opened="true"
+        
       >
-        <el-menu-item index="/vueHome">
+        <el-menu-item index="/">
           <i class="el-icon-menu"></i>
           <span>首页</span>
         </el-menu-item>
@@ -63,16 +64,4 @@ export default {
 </script>
 
 <style scoped>
-.sideBar {
-  width: 200px;
-  height: 100%;
-  position: absolute;
-  background: #f0ffff;
-}
-.mainContent {
-  width: 100%;
-  left: 200px;
-  right: 50px;
-  position: absolute;
-}
 </style>
